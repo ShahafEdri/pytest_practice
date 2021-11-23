@@ -1,5 +1,6 @@
 import sys
 import numbers
+from math import log as logarithm
 
 
 class CalculatorError(Exception):
@@ -59,19 +60,25 @@ if __name__ == '__main__':
         calculator.subtract,
         calculator.multiply,
         calculator.divide,
+        calculator.log,
+        calculator.root,
+        calculator.power,
     ]
 
     while True:
         for i, operation in enumerate(operations, start=1):
             print(f"{i}: {operation.__name__}")
         print("q: quit")
-        operation = int(input("Pick an operation:  "))
+        operation = input("Pick an operation:  ")
         if operation == 'q':
             sys.exit()
-        op = int(i)
-        a = float(input("What is a? "))
-        b = float(input("What is b? "))
+        operation = int(operation)
+        var1 = operations[operation-1].__code__.co_varnames[1]  # this displays the variable according to class method
+        var2 = operations[operation-1].__code__.co_varnames[2]  # this displays the variable according to class method
+        a = float(input(f"What is {var1}? "))
+        b = float(input(f"What is {var2}? "))
         try:
             print(operations[operation-1](a, b))
         except CalculatorError as ex:
             print(ex)
+        print()
