@@ -29,6 +29,22 @@ class Calculator:
         except ZeroDivisionError:
             raise CalculatorError("You can't devide by zero")
 
+    def log(self, argument, base):
+        try:
+            return logarithm(argument, base)
+        except ZeroDivisionError:
+            raise CalculatorError("base can't be equal to 1")
+        except ValueError:
+            raise CalculatorError("base has to be greater then 0")
+
+    def root(self, radicand, index):
+        if radicand < 0:
+            raise CalculatorError("radicand cant be a negative number")
+        return radicand**(1/index)
+
+    def power(self, number_to_power, power_factor):
+        return number_to_power**power_factor
+
     def _check_operand(self, operand):
         if not isinstance(operand, numbers.Number):
             raise CalculatorError(f'"{operand}" was not a number')
