@@ -3,15 +3,17 @@ from calculator import Calculator, CalculatorError
 import pytest
 
 
-def test_add():
+@pytest.mark.basic_functionality
+@pytest.mark.parametrize("input1,input2,expected", [3,1,4])
+def test_add(input1,input2,expected):
     # Arrange
     calculator = Calculator()
     # Act
-    result = calculator.add(3, 1)
+    result = calculator.add(input1,)
     # Assert
     assert result == 4, "test_add_assertion_error"
 
-
+@pytest.mark.weird_functionality
 def test_add_weird_stuff():
     # Arrange
     calculator = Calculator()
@@ -19,7 +21,7 @@ def test_add_weird_stuff():
     with pytest.raises(CalculatorError) as context:
         result = calculator.add("three", 1)
 
-
+@pytest.mark.weird_functionality
 def test_add_weirder_stuff():
     # Arrange
     calculator = Calculator()
@@ -28,6 +30,7 @@ def test_add_weirder_stuff():
         result = calculator.add("three", "two")
 
 
+@pytest.mark.basic_functionality
 def test_subtract():
     # Arrange
     calculator = Calculator()
@@ -37,6 +40,7 @@ def test_subtract():
     assert result == 2, "test_add_assertion_error"
 
 
+@pytest.mark.basic_functionality
 def test_multiply():
     # Arrange
     calculator = Calculator()
@@ -46,6 +50,7 @@ def test_multiply():
     assert result == 6, "test_add_assertion_error"
 
 
+@pytest.mark.basic_functionality
 def test_devide():
     # Arrange
     calculator = Calculator()
@@ -55,6 +60,7 @@ def test_devide():
     assert result == 1.5, "test_add_assertion_error"
 
 
+@pytest.mark.weird_functionality
 def test_divide_by_zero():
     calculator = Calculator()
     with pytest.raises(CalculatorError):
