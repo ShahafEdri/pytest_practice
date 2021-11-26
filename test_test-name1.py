@@ -4,14 +4,15 @@ import pytest
 
 
 @pytest.mark.basic_functionality
-@pytest.mark.parametrize("input1,input2,expected", [3,1,4])
-def test_add(input1,input2,expected):
+@pytest.mark.parametrize("input1,input2,expected", [(3, 1, 4)])
+def test_add(input1, input2, expected):
     # Arrange
     calculator = Calculator()
     # Act
-    result = calculator.add(input1,)
+    result = calculator.add(input1, input2)
     # Assert
-    assert result == 4, "test_add_assertion_error"
+    assert result == expected, "test_add_assertion_error"
+
 
 @pytest.mark.weird_functionality
 def test_add_weird_stuff():
@@ -20,6 +21,7 @@ def test_add_weird_stuff():
     # Act
     with pytest.raises(CalculatorError) as context:
         result = calculator.add("three", 1)
+
 
 @pytest.mark.weird_functionality
 def test_add_weirder_stuff():
