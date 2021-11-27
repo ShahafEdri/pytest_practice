@@ -3,3 +3,7 @@ venv/*
 
 # pycache
 __pycache__/*
+
+# pytest-html
+/*.html
+assets/*

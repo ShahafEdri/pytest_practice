@@ -1,5 +1,4 @@
 from math import exp
-from _pytest.assertion import pytest_sessionfinish
 from calculator import Calculator, CalculatorError
 import pytest
 
@@ -25,10 +24,10 @@ def test_string_input_and_int_input_to_add(input1, input2, error_type):
 
 
 @pytest.mark.weird_functionality
-def test_2_strings_input_to_add():
+def test_2_strings_input_to_add(fixture_str_number_input):
     calculator = Calculator()
     with pytest.raises(CalculatorError) as contxt:
-        result = calculator.add("three", "two")
+        result = calculator.add(fixture_str_number_input[1], fixture_str_number_input[2])
 
 
 @pytest.mark.basic_functionality
@@ -105,7 +104,6 @@ def test_weird_root(radicand, index, error_type):
     calculator = Calculator()
     with pytest.raises(error_type):
         result = calculator.log(radicand, index)
-
 
 @ pytest.mark.basic_functionality
 @ pytest.mark.parametrize("number, factor, expected", [(2, 3, 8),       # + + substraction
