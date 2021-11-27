@@ -105,7 +105,6 @@ def test_weird_root(radicand, index, error_type):
     with pytest.raises(error_type):
         result = calculator.log(radicand, index)
 
-
 @ pytest.mark.basic_functionality
 @ pytest.mark.parametrize("number, factor, expected", [(2, 3, 8),       # + + substraction
                                                        (-2, 3, -8),
