@@ -1,3 +1,4 @@
+from math import exp
 from _pytest.assertion import pytest_sessionfinish
 from calculator import Calculator, CalculatorError
 import pytest
@@ -60,10 +61,10 @@ def test_multiply(input1, input2, expected):
 def test_devide(input1, input2, expected):
     calculator = Calculator()
     result = calculator.divide(input1, input2)
-    assert result == expected, "test_add_assertion_error"
+    assert result == expected, "test_devide_assertion_error"
 
 
-@pytest.mark.weird_functionality
+@pytest.mark.miss_use_functionality
 @pytest.mark.parametrize("input1,error_type", [(0.5, CalculatorError),     # fraction division
                                                (5, CalculatorError),   # normal division
                                                (0, CalculatorError)])  # zero by zero division
@@ -71,3 +72,46 @@ def test_divide_by_zero(input1, error_type):
     calculator = Calculator()
     with pytest.raises(error_type):
         result = calculator.divide(input1, 0)
+
+
+@pytest.mark.basic_functionality
+@pytest.mark.parametrize("argument, base, expected", [(exp(2), exp(1), 2)])   # - - substraction
+def test_log(argument, base, expected):
+    calculator = Calculator()
+    result = calculator.log(argument, base)
+    assert result == expected, "test_log_assertion_error"
+
+
+@pytest.mark.miss_use_functionality
+@pytest.mark.parametrize("argument, base, error_type", [(8, 1, CalculatorError),
+                                                        (8, -1, CalculatorError)])
+def test_weird_log(argument, base, error_type):
+    calculator = Calculator()
+    with pytest.raises(error_type):
+        result = calculator.log(argument, base)
+
+
+@pytest.mark.basic_functionality
+@pytest.mark.parametrize("radicand, index, expected", [(8**3, 3, 8)])   # - - substraction
+def test_root(radicand, index, expected):
+    calculator = Calculator()
+    result = round(calculator.root(radicand, index), 2)
+    assert result == expected, "test_root_assertion_error"
+
+
+@pytest.mark.miss_use_functionality
+@pytest.mark.parametrize("radicand, index, error_type", [(-8, 1, CalculatorError)])
+def test_weird_root(radicand, index, error_type):
+    calculator = Calculator()
+    with pytest.raises(error_type):
+        result = calculator.log(radicand, index)
+
+
+@ pytest.mark.basic_functionality
+@ pytest.mark.parametrize("number, factor, expected", [(2, 3, 8),       # + + substraction
+                                                       (-2, 3, -8),
+                                                       (2, -3, 1/8)])   # - - substraction
+def test_power(number, factor, expected):
+    calculator = Calculator()
+    result = calculator.power(number, factor)
+    assert result == expected, "test_add_assertion_error"
